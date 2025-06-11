@@ -1,70 +1,51 @@
 import streamlit as st
+import random
 
-# 🎨 설정
+# 🧁 페이지 설정
 st.set_page_config(
-    page_title="MBTI 진로 추천기 💼✨",
-    page_icon="🧭",
-    layout="centered",
+    page_title="오늘 저녁 뭐 먹지? 🍽️",
+    page_icon="🍜",
+    layout="centered"
 )
 
-# 💖 타이틀 & 설명
+# 🎀 타이틀
 st.markdown(
     """
-    <h1 style='text-align: center; color: #ff66cc;'>MBTI로 보는 나의 미래 직업 💼✨</h1>
-    <h4 style='text-align: center; color: #666;'>당신의 성격에 딱 맞는 직업을 추천해드릴게요! 🧠🌟</h4>
+    <h1 style='text-align: center; color: #ff9966;'>오늘 저녁 뭐 먹지? 🍽️💭</h1>
+    <h4 style='text-align: center; color: #666;'>고민은 이제 그만! 버튼을 누르면 메뉴가 딱! 🍱✨</h4>
     <br>
     """,
     unsafe_allow_html=True
 )
 
-# 🎯 MBTI 목록
-mbti_types = [
-    "INTJ", "INTP", "ENTJ", "ENTP",
-    "INFJ", "INFP", "ENFJ", "ENFP",
-    "ISTJ", "ISFJ", "ESTJ", "ESFJ",
-    "ISTP", "ISFP", "ESTP", "ESFP"
-]
-
-# 🔮 MBTI별 직업 추천 데이터
-career_recommendations = {
-    "INTJ": ["데이터 과학자 📊", "전략 컨설턴트 🧠", "소프트웨어 엔지니어 💻"],
-    "INTP": ["AI 연구원 🤖", "철학자 📚", "기술 컨설턴트 💡"],
-    "ENTJ": ["CEO 🧑‍💼", "프로덕트 매니저 📈", "정치가 🗳️"],
-    "ENTP": ["창업가 🚀", "마케팅 전문가 📣", "기획자 🗂️"],
-    "INFJ": ["상담가 💬", "심리학자 🧠", "작가 ✍️"],
-    "INFP": ["예술가 🎨", "시인 📖", "사회운동가 ✊"],
-    "ENFJ": ["교사 🍎", "HR매니저 👥", "정신과 의사 🧑‍⚕️"],
-    "ENFP": ["디자이너 🎨", "콘텐츠 크리에이터 📸", "이벤트 플래너 🎉"],
-    "ISTJ": ["회계사 📑", "경찰 👮", "엔지니어 ⚙️"],
-    "ISFJ": ["간호사 🏥", "도서관 사서 📚", "초등학교 교사 🏫"],
-    "ESTJ": ["프로젝트 매니저 🗂️", "공무원 🏛️", "군인 🎖️"],
-    "ESFJ": ["간호조무사 👩‍⚕️", "상담교사 🧑‍🏫", "이벤트 코디네이터 🎈"],
-    "ISTP": ["기술자 🔧", "파일럿 ✈️", "응급 구조사 🚑"],
-    "ISFP": ["패션 디자이너 👗", "사진작가 📷", "요리사 🍳"],
-    "ESTP": ["영업사원 📞", "스턴트맨 🤸", "리포터 🎤"],
-    "ESFP": ["연예인 🌟", "방송인 🎬", "무대 감독 🎭"]
+# 🍛 메뉴 리스트
+menus = {
+    "한식 🇰🇷": ["김치찌개 🍲", "불고기 🍖", "비빔밥 🥘", "삼겹살 🐷", "된장찌개 🫕", "제육볶음 🌶️"],
+    "중식 🇨🇳": ["짜장면 🍜", "짬뽕 🌶️", "탕수육 🍖", "마라탕 🔥", "꿔바로우 🥢"],
+    "일식 🇯🇵": ["초밥 🍣", "우동 🍲", "돈카츠 🍱", "규동 🐮", "라멘 🍜"],
+    "양식 🇺🇸": ["피자 🍕", "스테이크 🥩", "파스타 🍝", "버거 🍔", "치킨 윙 🍗"],
+    "분식 🎈": ["떡볶이 🌶️", "순대 🍢", "김밥 🍙", "라볶이 🍜", "오뎅 🍢"]
 }
 
-# 🎈 선택 위젯
-selected_mbti = st.selectbox("당신의 MBTI를 선택하세요 🔍", mbti_types)
+# 🌍 카테고리 선택
+category = st.selectbox("먹고 싶은 음식 스타일을 골라보세요! 😋", list(menus.keys()))
 
-# 🎉 결과 표시
-if selected_mbti:
-    st.markdown(f"## {selected_mbti} 유형의 추천 직업 🎯")
-    for job in career_recommendations[selected_mbti]:
-        st.markdown(f"- {job}")
-    
+# 🍽️ 추천 버튼
+if st.button("✨ 저녁 메뉴 추천 받기! ✨"):
+    selected_menu = random.choice(menus[category])
     st.markdown(
-        """
-        <br>
-        <h5 style='text-align: center; color: #888;'>✨ 당신의 MBTI는 놀라운 잠재력을 가지고 있어요! ✨</h5>
+        f"""
+        <h2 style='text-align: center; color: #ff6699;'>오늘의 추천 메뉴는...!</h2>
+        <h1 style='text-align: center; font-size: 60px;'>🎉 {selected_menu} 🎉</h1>
         """,
         unsafe_allow_html=True
     )
+else:
+    st.markdown("<p style='text-align: center; color: #aaa;'>👇 카테고리를 선택하고 버튼을 눌러보세요!</p>", unsafe_allow_html=True)
 
-# 🌈 푸터
+# 🐾 푸터
 st.markdown("---")
 st.markdown(
-    "<div style='text-align: center; color: #bbb;'>Made with ❤️ by ChatGPT</div>",
+    "<div style='text-align: center; color: #bbb;'>Made with 🍣 by ChatGPT</div>",
     unsafe_allow_html=True
 )
